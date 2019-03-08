@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import MenuAppBar from './MenuAppBar';
+import Footer from './Footer';
+import LoginToggle from './LoginToggle';
 
 class App extends Component {
+  state = {
+    auth: false,
+  };
+
+  handleLoginToggleChange = event => {
+    this.setState({ auth: event.target.checked });
+  };
+
   render() {
+    const auth = this.state.auth;
+
     return (
       <div className="App">
+        <LoginToggle auth={auth} authChange={this.handleLoginToggleChange} />
+        <MenuAppBar auth={auth} />
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Contents
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
+        <Footer auth={auth}/>
       </div>
     );
   }
